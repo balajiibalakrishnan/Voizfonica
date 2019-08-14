@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Success</title>
+</head>
+<style>
+    .button2 {
+        background-color: #008CBA;
+        color: white;
+        border: 2px solid #008CBA;
+    }
+
+    .button2:hover {
+        background-color:white ;
+        color: black;
+    }
+    .button {
+        background-color:#008CBA ; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        padding: 10px;
+    }
+</style>
+<body >
+
+<!--<a href="javascript:genPDF()" id="invoice">Generate invoice</a>-->
+
+<!--<div class="card-body" th:each="i : ${bill}" style="text-align: center">
+    <h1 class="card-title"th:text="${i.dongle.getName()}">Rs 1000</h1>
+    <h1 class="card-text" th:text="${i.dongle.getValid()}">Offer Details:
+        10 days validity</h1>
+    <h1 class="card-text" th:text="${i.dongle.getAmount()}">Rs.35 talktime  </h1>
+</div>-->
+<div style="margin-top: 100px;text-align: center" id="HTMLtoPDF">
+    <h1> <center>Thank you for your purchase</center></h1>
+    <h2><center>Payment Successful!</center></h2>
+    <!--<table align="center" >
+        <thead>
+        <th>UserName</th>
+        <th>PlanName</th>
+        <th>Validity</th>
+        <th>Price(RS)</th>
+        </thead>
+
+        <tr th:each="car : ${bill}">
+            <td th:text="${car.user}">No Value</td>
+            <td th:text="${car.dongle.getName()}">No Plan</td>
+            <td th:text="${car.dongle.getValid()}">No Plan</td>
+            <td th:text="${car.dongle.getAmount()}">No Plan</td>
+
+        </tr>
+    </table>-->
+    <table th:each="i : ${bill}"  align="center">
+        <tr>
+            <th>User name</th>
+            <td th:text="${i.user}"></td>
+        </tr>
+        <tr>
+            <th>Name on card</th>
+            <td th:text="${i.payment.getOwner()}"></td>
+        </tr>
+        <tr>
+            <th>Plan name</th>
+            <td th:text="${i.postPaid.getName()}"></td>
+        </tr>
+        <tr>
+            <th>Plan validity</th>
+            <td th:text="${i.postPaid.getValid()}"></td>
+        </tr>
+        <tr>
+            <th>Amount(in Rs)</th>
+            <td th:text="${i.postPaid.getAmount()}"></td>
+        </tr>
+    </table>
+</div>
+<!-- here we call the function that makes PDF -->
+<!--<a href="#" onclick="HTMLtoPDF()">Download PDF</a>-->
+<div style="padding-top: 10px">
+    <center> <button class="button button2" onclick="HTMLtoPDF()">Invoice</button></center>
+    <div style="text-align: center">
+        <center><img src="https://i.pinimg.com/originals/0d/e4/1a/0de41a3c5953fba1755ebd416ec109dd.gif" /></center>
+    </div>
+</div>
+<!-- these js files are used for making PDF -->
+<script src="js/jspdf.js"></script>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/pdfFromHTML.js"></script>
+</body>
+</html>
